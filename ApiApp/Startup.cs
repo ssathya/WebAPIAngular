@@ -32,7 +32,7 @@ namespace ApiApp
             }).AddJwtBearer(options =>
             {
                 options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
-                options.Audience = Configuration["Auth0:ApiIdentifier"];
+                options.Audience = Configuration["Auth0:ClientId"];
                 options.IncludeErrorDetails = true;
             });
             services.AddCors(options =>
