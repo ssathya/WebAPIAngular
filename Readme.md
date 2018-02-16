@@ -1,14 +1,12 @@
-Template project for .NET Core API provider and Angular client with Authentication.
-===================================================================================
+.NET Core API provider and Angular client with Authentication.
+==============================================================
 
 Summary
 -------
 
-There was a need to build an SPA application that uses Angular as the frontend
-and .NET Core WEB API as the backend to provide API calls and of course provide
-data only for authenticated users. Did little research online for any
-project/documentation that would guide me build an application that would do the
-following:
+There was a need to build an SPA application with Angular frontend and .NET Core
+WEB API as the backend. It was hard to find a template project or guide that
+would do the following:
 
 -   Authenticate user
 
@@ -19,37 +17,41 @@ following:
 -   The server and client should be independent (i.e. .net application and the
     client can be hosted on different servers).
 
-Stumbled upon some projects but none of them were not as simple as "Hello World!"
-application. This project is a template project. All it does is allow the user
-to log in and once authenticated it will reach the web API application and get a
-simple JSON message. The application uses Auth0 to do identity management.
+Did come across a couple of tutorials but none of them were not as simple as
+"Hello World" application and hence this template project was built. This
+application will allow the user to log in and once authenticated it will reach
+the backend server. The backend server will again check the user authentication
+with the authentication server; If valid user & client application with sends a
+JSON message. The application uses Auth0 to do identity management.
 
 Objectives
 ----------
 
-As mentioned above the template project should be a simple application that
-should not have any features/libraries that will be redundant when using in
-another project. To that extent, only minimal required libraries are included
-for this project. The aim is once checked out/downloaded from the repository one
-should be able to use the project from the get-go.
+As mentioned earlier this template project is simple and includes only libraries
+that are needed to authenticate a user and get a JSON message from API provider.
 
 Background
 ----------
 
-We are building an application to track security inventory and its performance.
-The application will track the performance of securities and send a notification
-to the account owners if specific actions need to be taken.
+When building an application that involves Personally Identifiable Information
+(PII) it is normal practice to build a layered application. The planned
+approach:
 
-Account owners will update their inventory and other details from hand-held
-devices or their computer. The server application needs to securely store user
-information and process their inventory, and send a notification when needed.
+-   Use an external vendor to authenticate users.
 
-As we are handling personally identifiable information (PII) it was decided to
-use an architecture that distributes authentication, account ownerâ€™s personal
-information and inventory in different applications. This architecture weights
-that client, server, database, filesystem etc. placed on different platforms to
-minimize relationship between account holder, inventory and other information by
-unauthorized individuals.
+-   The front-end will use the token (JWT) that is provided by authentication
+    system while requesting data from API server.
+
+-   Backend system will evaluate the token with the authentication provider and
+    provide data that is owned by the authenticated user.
+
+-   Backend system will not store information extracted from JWT and his/her's
+    belongings on the same resource.
+
+The above are the basic requirements. Most templates do not address PII issue
+i.e. integrate backend, authentication, and frontend in one executable. Hence
+this template project was built. The approach should strictly adhere to "single
+responsibility" for each executable.
 
 Scope
 -----
@@ -100,11 +102,11 @@ Assumptions
 
 The application assumes the following:
 
--   Authentication systemâ€™s availability. There is a vendor dependency as the
-    message from Auth0 (JWT) is used by downstream application to check if the
-    user is authorized.
+-   Authentication system's availability. There is a vendor dependency as the
+    message from Auth0 (JWT) is used by the downstream application to check if
+    the user is authorized.
 
-    -   This application may not be useful for other authentication vendors.
+    -   This application may not be used for other authentication vendors.
 
 Limitations
 -----------
