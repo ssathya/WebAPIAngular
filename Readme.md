@@ -4,25 +4,24 @@
 Summary
 -------
 
-There was a need to build an SPA application with Angular frontend and .NET Core
+There was a need to build an SPA application that uses Angular frontend and .NET Core
 WEB API as the backend. It was hard to find a template project or guide that
 would do the following:
 
 -   Authenticate user
 
--   Get data from API server â€“ only for authenticated users.
+-   Get data from API server - only if the user is authenticated.
 
--   Authorization should be done at API server.
+-   Authorization and Authentication should be done by different entitites.
 
--   The server and client should be independent (i.e. .net application and the
+-   The server and client should be independent (i.e. API server application and the
     client can be hosted on different servers).
 
-Did come across a couple of tutorials but none of them were not as simple as
-"Hello World" application and hence this template project was built. This
+Did come across a couple of tutorials but we needed a  simple "Hello World". This
 application will allow the user to log in and once authenticated it will reach
 the backend server. The backend server will again check the user authentication
-with the authentication server; If valid user & client application with sends a
-JSON message. The application uses Auth0 to do identity management.
+with the authentication server; If both user & client application are authenticated then 
+the server responds with a JSON message. The application uses Auth0 to do identity management.
 
 Objectives
 ----------
@@ -34,16 +33,16 @@ Background
 ----------
 
 When building an application that involves Personally Identifiable Information
-(PII) it is normal practice to build a layered application. The planned
+(PII) it is normal practice to build a layered solution. The planned
 approach:
 
 -   Use an external vendor to authenticate users.
 
 -   The front-end will use the token (JWT) that is provided by authentication
-    system while requesting data from API server.
+    system for requesting data from API server.
 
--   Backend system will evaluate the token with the authentication provider and
-    provide data that is owned by the authenticated user.
+-   Backend system evaluates the token with the authentication provider and
+    provide only the data that is owned by the authenticated user.
 
 -   Backend system will not store information extracted from JWT and his/her's
     belongings on the same resource.
